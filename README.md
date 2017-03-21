@@ -21,3 +21,11 @@ libnetpbm functions to read a pbm image header, create a new pbm file with the h
 data, then copy the actual image. The idea is to show how the functions for opening,
 reading, and writing pbm files can be used. It's a bit of a toy application, as you'd
 normally do a straight copy with cp!
+
+## License ##
+
+This project is licensed under the GPLv3
+
+### Author ##
+
+Fraser Cadger <frasercadger@gmail.com>
