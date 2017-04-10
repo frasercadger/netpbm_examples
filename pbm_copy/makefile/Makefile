@@ -14,3 +14,7 @@ all: $(OUTPUT)
 $(OUTPUT):  $(SOURCE)
 	    $(MKDIR) $(BIN_DIR)
 	    $(CC) $(INC) $< $(CFLAGS) -o $(OUTPUT) $(LIBS)
+
+.PHONY: clean
+clean:
+	rm -f $(OUTPUT)
