@@ -76,6 +76,9 @@ int main(int argc, char *argv[])
     {
         printf("Successfuly opened %s\n", p_in_file);
     }
+    /* Read the image header from file and initialise input structure */
+    struct pam in_pbm;
+    pnm_readpaminit(p_input_file, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
 
     /* TODO: Copy image header to output file */
 
