@@ -26,6 +26,7 @@
 #include <string.h>
 
 /* TODO: Constants */
+static const char *p_default_out_file = "test.pbm";
 
 /* TODO: Function prototypes */
 
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
     {
         /* TODO: Use default filename */
         /* XXX: Need to define one */
+        strcpy(p_out_file, p_default_out_file);
     }
 
     /* TODO: Open PBM image */
