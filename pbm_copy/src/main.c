@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
     /* TODO: Open PBM image */
     FILE *p_input_file = fopen(p_in_file, "r");
-    if(p_inpput_file == NULL)
+    if(p_input_file == NULL)
     {
         printf("Failed to open file\n");
         return -1;
