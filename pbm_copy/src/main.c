@@ -65,6 +65,16 @@ int main(int argc, char *argv[])
     }
 
     /* TODO: Open PBM image */
+    FILE *p_input_file = fopen(p_in_file, "r");
+    if(p_inpput_file == NULL)
+    {
+        printf("Failed to open file\n");
+        return -1;
+    }
+    else
+    {
+        printf("Successfuly opened %s\n", p_in_file);
+    }
 
     /* TODO: Copy image header to output file */
 
