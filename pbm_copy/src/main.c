@@ -21,6 +21,9 @@
 */
 
 /* TODO: Includes */
+/* Standard includes */
+#include <stdio.h>
+#include <string.h>
 
 /* TODO: Constants */
 
@@ -29,11 +32,28 @@
 /* TODO: main() definition */
 int main(int argc, char *argv[])
 {
+    printf("Beginning pbm_copy\n");
+
     /* TODO: Initialise pm by passing the name of the program */
 
-    /* TODO: Get input filename from command line */
+    /* Get input filename from command line */
+    if(argc < 2)
+    {
+        printf("Usage: pbm_copy input_filename [output_filename]\n");
+        return -1;
+    }
 
     /* TODO: Get optional output filename, otherwise use default */
+    char *p_out_file;
+    if(argc == 3)
+    {
+        strcpy(p_out_file, argv[2]);
+    }
+    else
+    {
+        /* TODO: Use default filename */
+        /* XXX: Need to define one */
+    }
 
     /* TODO: Open PBM image */
 
