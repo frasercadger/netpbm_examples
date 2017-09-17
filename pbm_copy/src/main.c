@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    /* TODO: Get optional output filename, otherwise use default */
+    /* Get optional output filename, otherwise use default */
     char *p_out_file;
     if(argc == 3)
     {
@@ -52,8 +52,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-        /* TODO: Use default filename */
-        /* XXX: Need to define one */
         strcpy(p_out_file, p_default_out_file);
     }
 
