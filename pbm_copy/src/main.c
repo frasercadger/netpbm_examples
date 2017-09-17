@@ -21,6 +21,10 @@
 */
 
 /* TODO: Includes */
+
+/* libnetpbm include */
+#include "netpbm/pam.h"
+
 /* Standard includes */
 #include <stdio.h>
 #include <string.h>
@@ -35,7 +39,12 @@ int main(int argc, char *argv[])
 {
     printf("Beginning pbm_copy\n");
 
-    /* TODO: Initialise pm by passing the name of the program */
+    /* Initialise pm by passing the name of the program 
+       Docs state pm_init() must be invoked by all programs using libnetpbm before
+       handling arguments.
+       See: http://netpbm.sourceforge.net/doc/libpm.html
+    */
+    pm_init(argv[0], 0);
 
     /* Get input filename from command line */
     if(argc < 2)
