@@ -29,6 +29,18 @@
 /* TODO: main() definition */
 int main(int argc, char *argv[])
 {
+    /* TODO: Initialise pm by passing the name of the program */
+
+    /* TODO: Get input filename from command line */
+
+    /* TODO: Get optional output filename, otherwise use default */
+
+    /* TODO: Open PBM image */
+
+    /* TODO: Copy image header to output file */
+
+    /* TODO: Copy actual image */
+i
     return 0;
 }
 
