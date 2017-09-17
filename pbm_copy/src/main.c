@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     /* TODO: Copy image header to output file */
 
     /* TODO: Copy actual image */
-i
     return 0;
 }
 
