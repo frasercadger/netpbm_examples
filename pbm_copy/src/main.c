@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
         printf("Usage: pbm_copy input_filename [output_filename]\n");
         return -1;
     }
+    char *p_in_file = argv[1];
 
     /* Get optional output filename, otherwise use default */
     char *p_out_file;
