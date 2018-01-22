@@ -53,14 +53,14 @@ int main(int argc, char *argv[])
     char *p_in_filename = argv[1];
 
     /* Get optional output filename, otherwise use default */
-    char *p_out_file;
+    char *p_out_filename;
     if(argc == 3)
     {
-        strcpy(p_out_file, argv[2]);
+        strcpy(p_out_filename, argv[2]);
     }
     else
     {
-        strcpy(p_out_file, p_default_out_file);
+        strcpy(p_out_filename, p_default_out_file);
     }
 
     /* Open PBM image */
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     memcpy(&out_pbm, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
 
     /* Set output file */
-    FILE *p_output_file = fopen(p_out_file, "w");
+    FILE *p_output_file = fopen(p_out_filename, "w");
     if(p_output_file == NULL)
     {
         printf("Failed to open create output file\n");
