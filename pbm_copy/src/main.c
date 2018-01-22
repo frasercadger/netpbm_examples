@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
         printf("Usage: pbm_copy input_filename [output_filename]\n");
         return -1;
     }
-    malloc(strlen(argv[1]) + 1);
-    char *p_in_filename = argv[1];
+    char *p_in_filename = malloc(strlen(argv[1]) + 1);
+    p_in_filename = argv[1];
 
     /* Get optional output filename, otherwise use default */
     char *p_out_filename;
