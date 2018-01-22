@@ -14,13 +14,12 @@ My motiviation is to learn more about image processing myself, and share this wi
 
 ## Examples ##
 
-Right now there are none!
+Examples will be listed here as and when they are ready for public consumption. If you
+notice a new subdirectory that isn't listed, then it's probably not ready!
 
-My first intended example is a simple program to copy one pbm file to another, using
-libnetpbm functions to read a pbm image header, create a new pbm file with the header
-data, then copy the actual image. The idea is to show how the functions for opening,
-reading, and writing pbm files can be used. It's a bit of a toy application, as you'd
-normally do a straight copy with cp!
+-pbm_copy: reads an existing pbm file metadata, then copies the metadata and image data
+to a new file. The point is to showcase the libnetpbm functions for reading and writing
+pbm images. Yes, the end result is the same as doing 'cp file1.pbm to file2.pbm' :).
 
 ## License ##
 
