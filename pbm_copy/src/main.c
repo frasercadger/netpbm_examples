@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         printf("Usage: pbm_copy input_filename [output_filename]\n");
         return -1;
     }
-    char *p_in_file = argv[1];
+    char *p_in_filename = argv[1];
 
     /* Get optional output filename, otherwise use default */
     char *p_out_file;
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     }
 
     /* TODO: Open PBM image */
-    FILE *p_input_file = fopen(p_in_file, "r");
+    FILE *p_input_file = fopen(p_in_filename, "r");
     if(p_input_file == NULL)
     {
         printf("Failed to open file\n");
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Successfuly opened %s\n", p_in_file);
+        printf("Successfuly opened %s\n", p_in_filename);
     }
     /* Read the image header from file and initialise input structure */
     struct pam in_pbm;
