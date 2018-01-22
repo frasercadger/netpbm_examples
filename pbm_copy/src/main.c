@@ -82,8 +82,9 @@ int main(int argc, char *argv[])
     pnm_readpaminit(p_input_file, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
 
     /* Prepare output file */
+    printf("Preparing output file\n");
 
-    /* Create output structure, copying in structs values
+    /* Create output structure, copying in struct values
      * This will create the header needed for the output file. */
     struct pam out_pbm;
     memcpy(&out_pbm, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
@@ -96,16 +97,17 @@ int main(int argc, char *argv[])
     }
     out_pbm.file = p_output_file;
 
+    printf("Writing output header\n");
+
     /* Copy image header to output file */
     pnm_writepaminit(&out_pbm);
-
-    /* TODO: Copy actual image */
-
 
     /* Allocate memory to hold PBM row(s) to a tuple pointer
      * tuple_row now effectively points to an 'array' of rows*/
     tuple *p_tuple_row = pnm_allocpamrow(&in_pbm);
-    
+
+    printf("Preparing to copy image from %s to %s...\n", p_in_filename, p_out_filename);
+
     /* Copy each row of input to the output */
     for( uint32_t row = 0; row < in_pbm.height; ++row)
     {
@@ -113,6 +115,8 @@ int main(int argc, char *argv[])
         /* Automatically 'seeks' the next row, so no need to manually increment pointer */
         pnm_writepamrow(&out_pbm, p_tuple_row);
     }
+
+    printf("Copy complete\nPerforming cleanup...\n");
 
     /* Tuple pointer cleanup */
     pnm_freepamrow(p_tuple_row);
