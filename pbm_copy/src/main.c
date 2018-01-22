@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         return -1;
     }
     char *p_in_filename = malloc(strlen(argv[1]) + 1);
-    p_in_filename = argv[1];
+    strcpy(p_in_filename, argv[1]);
 
     /* Get optional output filename, otherwise use default */
     char *p_out_filename;
