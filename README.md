@@ -12,6 +12,19 @@ See http://netpbm.sourceforge.net/doc/libnetpbm.html for more on libnetpbm
 
 My motiviation is to learn more about image processing myself, and share this with others.
 
+## Requirements ##
+
+All examples have been written and tested on a Debian Linux (Jessie) environment, however
+there is no platform specific code, only standard POSIX I/O so the examples should work on
+most Unix-like systems. They will, however probably require some porting to run on
+Windows.
+
+Compiler: gcc
+
+Build system: GNU Make
+
+External libraries: libnetpbm
+
 ## Examples ##
 
 Examples will be listed here as and when they are ready for public consumption. If you
