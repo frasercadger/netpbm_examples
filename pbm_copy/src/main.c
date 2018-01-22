@@ -135,6 +135,11 @@ int main(int argc, char *argv[])
     /* Tuple pointer cleanup
      * Frees the memory allocated by pnm_allocpamrow */
     pnm_freepamrow(p_tuple_row);
+
+    /* Free memory allocated to filename pointers */
+    free(p_in_filename);
+    free(p_out_filename);
+
     return 0;
 }
 
