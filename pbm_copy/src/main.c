@@ -20,8 +20,6 @@
     + header, then fill it with the image data.
 */
 
-/* TODO: Includes */
-
 /* libnetpbm include */
 #include "netpbm/pam.h"
 
@@ -65,7 +63,7 @@ int main(int argc, char *argv[])
         strcpy(p_out_file, p_default_out_file);
     }
 
-    /* TODO: Open PBM image */
+    /* Open PBM image */
     FILE *p_input_file = fopen(p_in_filename, "r");
     if(p_input_file == NULL)
     {
@@ -79,6 +77,20 @@ int main(int argc, char *argv[])
     /* Read the image header from file and initialise input structure */
     struct pam in_pbm;
     pnm_readpaminit(p_input_file, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
+
+    /* TODO: Prepare output file */
+
+    /* Create output struct, copying in structs values */
+    struct pam out_pbm;
+    memcpy(&out_pbm, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
+
+    /* Set output file */
+    FILE *p_output_file = fopen(p_out_file, "w");
+    if(p_output_file == NULL)
+    {
+        printf("Failed to open create output file\n");
+    }
+    out_pbm.file = p_output_file;
 
     /* TODO: Copy image header to output file */
 
