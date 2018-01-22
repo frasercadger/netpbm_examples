@@ -18,6 +18,7 @@
     libnetpbm functions. The purpose is to show how these functions are
     used to open the original, read in the data, generate an empty pbm
     + header, then fill it with the image data.
+    libnetpbm documentation can be found here: http://netpbm.sourceforge.net/doc/libnetpbm_image.html
 */
 
 /* libnetpbm include */
