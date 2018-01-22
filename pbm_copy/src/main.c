@@ -27,20 +27,21 @@
 #include <stdio.h>
 #include <string.h>
 
-/* TODO: Constants */
+/* Constants */
 static const char *p_default_out_file = "test.pbm";
 
 /* TODO: Function prototypes */
 
-/* TODO: main() definition */
+/* Function definitions */
+
 int main(int argc, char *argv[])
 {
     printf("Beginning pbm_copy\n");
 
-    /* Initialise pm by passing the name of the program 
-       Docs state pm_init() must be invoked by all programs using libnetpbm before
-       handling arguments.
-       See: http://netpbm.sourceforge.net/doc/libpm.html
+    /* Initialise pm by passing the name of the program
+     * Docs state pm_init() must be invoked by all programs using libnetpbm before
+     * handling arguments.
+     * See: http://netpbm.sourceforge.net/doc/libpm.html
     */
     pm_init(argv[0], 0);
 
@@ -77,15 +78,23 @@ int main(int argc, char *argv[])
     {
         printf("Successfuly opened %s\n", p_in_filename);
     }
-    /* Read the image header from file and initialise input structure */
+    /* Read the image header from file and initialise input structure
+     * This is essentially the image's metadata.
+     * For more information on struct pam see: http://netpbm.sourceforge.net/doc/libnetpbm_ug.html#pamstruct
+     * For documentation on pnm_readpaminit see the libnetpbm manual
+     */
     struct pam in_pbm;
     pnm_readpaminit(p_input_file, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
+
+    /* TODO: Print some information about the file */
 
     /* Prepare output file */
     printf("Preparing output file\n");
 
     /* Create output structure, copying in struct values
-     * This will create the header needed for the output file. */
+     * As we are doing a straight copy, the output file will
+     * have similar metadata to the input file 
+     */
     struct pam out_pbm;
     memcpy(&out_pbm, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
 
@@ -95,14 +104,17 @@ int main(int argc, char *argv[])
     {
         printf("Failed to open output file\n");
     }
+
+    /* Set output struct's file pointer to our output file */
     out_pbm.file = p_output_file;
 
     printf("Writing output header\n");
 
-    /* Copy image header to output file */
+    /* Copy image header to output file
+     */
     pnm_writepaminit(&out_pbm);
 
-    /* Allocate memory to hold PBM row(s) to a tuple pointer
+    /* Allocate memory to hold PBM rows to a tuple pointer
      * tuple_row now effectively points to an 'array' of rows*/
     tuple *p_tuple_row = pnm_allocpamrow(&in_pbm);
 
@@ -111,16 +123,18 @@ int main(int argc, char *argv[])
     /* Copy each row of input to the output */
     for( uint32_t row = 0; row < in_pbm.height; ++row)
     {
+        /* Read a single row of the image as a 'tuple'
+         * Then write the row to the out structure */
         pnm_readpamrow(&in_pbm, p_tuple_row);
-        /* Automatically 'seeks' the next row, so no need to manually increment pointer */
         pnm_writepamrow(&out_pbm, p_tuple_row);
+        /* Automatically 'seeks' the next row, so no need to manually increment pointer */
     }
 
     printf("Copy complete\nPerforming cleanup...\n");
 
-    /* Tuple pointer cleanup */
+    /* Tuple pointer cleanup
+     * Frees the memory allocated by pnm_allocpamrow */
     pnm_freepamrow(p_tuple_row);
     return 0;
 }
 
-/* TODO: Function definitions */
