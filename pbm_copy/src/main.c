@@ -34,7 +34,7 @@ static const char *p_default_out_file = "test.pbm";
 
 /* Function prototypes */
 static bool read_pbm_image(const char *filename, struct pam *p_input);
-static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename)
+static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename);
 static bool copy_pbm_image(struct pam *p_input, struct pam *p_output);
 
 /* Function definitions */
@@ -121,23 +121,7 @@ int main(int argc, char *argv[])
     }
     char *p_in_filename = malloc(strlen(argv[1]) + 1);
     strcpy(p_in_filename, argv[1]);
-
-    /* Open input file and read image metadata */
-    printf("Reading pbm image from: %s\n", p_in_filename);
-    struct pam in_pbm;
-    bool read_successful = read_pbm_image(p_in_filename, &in_pbm);
-    if(read_successful)
-    {
-        printf("Read successful\n");
-        /* TODO: Print some information about the file */
-    }
-    else
-    {
-        printf("Read failed\n Terminating");
-        free(p_in_filename);
-        return -1;
-    }
-    
+        
     /* Get optional output filename, otherwise use default */
     char *p_out_filename;
     if(argc == 3)
@@ -151,21 +135,57 @@ int main(int argc, char *argv[])
         strcpy(p_out_filename, p_default_out_file);
     }
 
-    /* Prepare output file */
-    printf("Preparing output file: %s\n", p_out_filename);
-    struct pam out_pbm;
-    prepare_pbm_copy(&in_pbm, &out_pbm, p_out_filename);
-
-    printf("Copying image from %s to %s...\n", p_in_filename, p_out_filename);
-    bool copy_successful = copy_pbm_image(&in_pbm, &out_pbm);
-    if(copy_successful)
+    /* Open input file and read image metadata */
+    printf("Reading pbm image from: %s\n", p_in_filename);
+    struct pam in_pbm;
+    bool read_successful = read_pbm_image(p_in_filename, &in_pbm);
+    if(!read_successful)
     {
-        printf("Copy successful\n");
+        printf("Read failed");
     }
     else
     {
-        printf("Copy failed\n");
+        printf("Read successful\n");
+        /* TODO: Print some information about the file */
+    
+        /* Prepare output file */
+        printf("Preparing output file: %s\n", p_out_filename);
+        struct pam out_pbm;
+        bool prep_successful = prepare_pbm_copy(&in_pbm, &out_pbm, p_out_filename);
+    
+        if(!prep_successful)
+        {
+            printf("Output preparation failed\n");
+        }
+        else
+        {
+            printf("Output preparation successful\n");   
+            printf("Copying image from %s to %s...\n", p_in_filename, p_out_filename);
+            bool copy_successful = copy_pbm_image(&in_pbm, &out_pbm);
+            if(copy_successful)
+            {
+                printf("Copy successful\n");
+            }
+            else
+            {
+                printf("Copy failed\n");
+            }
+        }
+        
     }
 
+    /* Cleanup */
+    printf("Cleaning up...\n");
+    if(p_in_filename)
+    {
+        free(p_in_filename);
+    }
+    if(p_out_filename)
+    {
+        free(p_out_filename);
+    }
+
+    printf("pbm_copy finished\n");
+    
     return 0;
 }
