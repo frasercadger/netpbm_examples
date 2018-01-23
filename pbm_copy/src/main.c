@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
     char *p_out_filename;
     if(argc == 3)
     {
-        malloc(strlen(argv[2]) + 1);
+        p_out_filename = malloc(strlen(argv[2]) + 1);
         strcpy(p_out_filename, argv[2]);
     }
     else
