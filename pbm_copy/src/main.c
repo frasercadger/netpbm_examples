@@ -32,8 +32,9 @@
 /* Constants */
 static const char *p_default_out_file = "test.pbm";
 
-/* TODO: Function prototypes */
+/* Function prototypes */
 static bool read_pbm_image(const char *filename, struct pam *p_input);
+static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename)
 static bool copy_pbm_image(struct pam *p_input, struct pam *p_output);
 
 /* Function definitions */
@@ -54,6 +55,30 @@ static bool read_pbm_image(const char *filename, struct pam *p_input)
     pnm_readpaminit(p_input_file, p_input, PAM_STRUCT_SIZE(tuple_type));
 
     return true;
+}
+
+static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename)
+{
+    /* Open output file */
+    FILE *p_output_file = fopen(p_filename, "w");
+    if(p_output_file == NULL)
+    {
+        printf("Failed to open output file\n");
+        return -1;
+    }
+
+    /* Create output structure, copying in struct values
+     * As we are doing a straight copy, the output file will
+     * have similar metadata to the input file 
+     */
+    memcpy(p_out_pbm, p_in_pbm, PAM_STRUCT_SIZE(tuple_type));
+
+    /* Set output struct's file pointer to our output file */
+    p_out_pbm->file = p_output_file;
+ 
+    /* Copy image header to output file
+     */
+    pnm_writepaminit(p_out_pbm);
 }
 
 static bool copy_pbm_image(struct pam *p_in_pbm, struct pam *p_out_pbm)
@@ -98,6 +123,7 @@ int main(int argc, char *argv[])
     strcpy(p_in_filename, argv[1]);
 
     /* Open input file and read image metadata */
+    printf("Reading pbm image from: %s\n", p_in_filename);
     struct pam in_pbm;
     bool read_successful = read_pbm_image(p_in_filename, &in_pbm);
     if(read_successful)
@@ -127,30 +153,10 @@ int main(int argc, char *argv[])
 
     /* Prepare output file */
     printf("Preparing output file: %s\n", p_out_filename);
-
-    /* Create output structure, copying in struct values
-     * As we are doing a straight copy, the output file will
-     * have similar metadata to the input file 
-     */
     struct pam out_pbm;
-    memcpy(&out_pbm, &in_pbm, PAM_STRUCT_SIZE(tuple_type));
+    prepare_pbm_copy(&in_pbm, &out_pbm, p_out_filename);
 
-    /* Open output file */
-    FILE *p_output_file = fopen(p_out_filename, "w");
-    if(p_output_file == NULL)
-    {
-        printf("Failed to open output file\n");
-    }
-
-    /* Set output struct's file pointer to our output file */
-    out_pbm.file = p_output_file;
- 
-    /* Copy image header to output file
-     */
-    printf("Writing output header\n");
-    pnm_writepaminit(&out_pbm);
-
-    printf("Preparing to copy image from %s to %s...\n", p_in_filename, p_out_filename);
+    printf("Copying image from %s to %s...\n", p_in_filename, p_out_filename);
     bool copy_successful = copy_pbm_image(&in_pbm, &out_pbm);
     if(copy_successful)
     {
