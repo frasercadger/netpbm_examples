@@ -17,7 +17,7 @@
     Description: copies a source .pbm file into a new .pbm file using 
     libnetpbm functions. The purpose is to show how these functions are
     used to open the original, read in the data, generate an empty pbm
-    + header, then fill it with the image data.
+    + header, then fill it with the image data copied from the input file.
     libnetpbm documentation can be found here: http://netpbm.sourceforge.net/doc/libnetpbm_image.html
 */
 
