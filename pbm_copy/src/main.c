@@ -79,6 +79,8 @@ static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const
     /* Copy image header to output file
      */
     pnm_writepaminit(p_out_pbm);
+
+    return true;
 }
 
 static bool copy_pbm_image(struct pam *p_in_pbm, struct pam *p_out_pbm)
@@ -100,6 +102,8 @@ static bool copy_pbm_image(struct pam *p_in_pbm, struct pam *p_out_pbm)
     /* Tuple pointer cleanup
      * Frees the memory allocated by pnm_allocpamrow */
     pnm_freepamrow(p_tuple_row);
+
+    return true;
 }
 
 int main(int argc, char *argv[])
