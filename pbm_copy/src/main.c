@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
     else
     {
         printf("Read successful\n");
-        /* TODO: Print some information about the file */
+        printf("Image height: %d, width: %d, depth: %d\n", in_pbm.height, in_pbm.width, in_pbm.depth);
     
         /* Prepare output file */
         printf("Preparing output file: %s\n", p_out_filename);
