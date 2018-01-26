@@ -18,6 +18,9 @@
     examples.
 */
 
+#ifndef COMMON_H
+#define COMMON_H
+
 /* libnetpbm include */
 #include "netpbm/pam.h"
 
@@ -27,3 +30,5 @@
 /* Function prototypes */
 bool read_pbm_image(const char *filename, struct pam *p_input);
 bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename);
+
+#endif
