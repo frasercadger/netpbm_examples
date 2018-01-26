@@ -21,6 +21,8 @@
     libnetpbm documentation can be found here: http://netpbm.sourceforge.net/doc/libnetpbm_image.html
 */
 
+#include "common.h"
+
 /* libnetpbm include */
 #include "netpbm/pam.h"
 
@@ -33,13 +35,11 @@
 static const char *p_default_out_file = "test.pbm";
 
 /* Function prototypes */
-static bool read_pbm_image(const char *filename, struct pam *p_input);
-static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename);
 static bool copy_pbm_image(struct pam *p_input, struct pam *p_output);
 
 /* Function definitions */
 
-static bool read_pbm_image(const char *filename, struct pam *p_input)
+bool read_pbm_image(const char *filename, struct pam *p_input)
 {    
     /* Open image as regular file */
     FILE *p_input_file = fopen(filename, "r");
@@ -57,7 +57,7 @@ static bool read_pbm_image(const char *filename, struct pam *p_input)
     return true;
 }
 
-static bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename)
+bool prepare_pbm_copy( struct pam *p_in_pbm, struct pam *p_out_pbm, const char *p_filename)
 {
     /* Open output file */
     FILE *p_output_file = fopen(p_filename, "w");

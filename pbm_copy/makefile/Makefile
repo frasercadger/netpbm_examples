@@ -1,5 +1,6 @@
 CC=gcc
 SOURCE_DIR=./src
+INC +=-I ../common
 BIN_DIR=./bin
 OUTPUT=$(BIN_DIR)/pbm_writer.o
 
