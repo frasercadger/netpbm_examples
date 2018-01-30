@@ -33,6 +33,7 @@ static const char *p_default_out_file = "bitflipped.pbm";
 /* Standard includes */
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Function prototypes */
 void pbm_bitflip(struct pam *p_in, struct pam *p_out);
