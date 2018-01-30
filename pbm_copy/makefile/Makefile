@@ -4,7 +4,7 @@ INC +=-I ../common
 BIN_DIR=./bin
 OUTPUT=$(BIN_DIR)/pbm_writer.o
 
-SOURCE= $(SOURCE_DIR)/main.c
+SOURCE= $(SOURCE_DIR)/*.c
 
 CFLAGS=-std=c11
 
@@ -14,7 +14,7 @@ all: $(OUTPUT)
 
 $(OUTPUT):  $(SOURCE)
 	    $(MKDIR) $(BIN_DIR)
-	    $(CC) $(INC) $< $(CFLAGS) -o $(OUTPUT) $(LIBS)
+	    $(CC) $(INC) $(SOURCE) $(CFLAGS) -o $(OUTPUT) $(LIBS)
 
 .PHONY: clean
 clean:
