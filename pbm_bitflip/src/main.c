@@ -28,7 +28,7 @@
 #include "netpbm/pam.h"
 
 /* Constants */
-static const char *p_default_out_file = "bitflipped.pbm";
+static const char *p_out_filename = "bitflipped.pbm";
 
 /* Standard includes */
 #include <stdbool.h>
@@ -43,6 +43,8 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out)
 {
 }
 
+/* A lot of the main() code from pbm_copy can be reused here for opening the input file and
+ * prepping the output file. In this example the outputfile name is no longer a parameter.*/
 int main(int argc, char *argv[])
 {
     printf("Beginning pbm_bitflip\n");
@@ -74,6 +76,22 @@ int main(int argc, char *argv[])
     {
         printf("Read successful\n");
         printf("Image height: %d, width: %d, depth: %d\n", in_pbm.height, in_pbm.width, in_pbm.depth);
+
+        /* Prepare output file */
+        printf("Preparing output file: %s\n", p_out_filename);
+        struct pam out_pbm;
+        bool prep_successful = prepare_pbm_copy(&in_pbm, &out_pbm, p_out_filename);
+
+        if(!prep_successful)
+        {
+            printf("Output preparation failed\n");
+        }
+        else
+        {
+            printf("Output preparation successful\n");
+            /* TODO: Do bitflipping */
+            /* TODO: Write bitflipped image to output file */
+        }   
     }
 
     return 0;
