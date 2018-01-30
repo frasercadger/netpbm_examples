@@ -41,6 +41,13 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out);
 /* Function definitions */
 void pbm_bitflip(struct pam *p_in, struct pam *p_out)
 {
+    /* In order to bitflip , we need to know the following:
+     * How many rows the image contains (height). How many tuples/columns
+     * per row (width). Number of samples per row (depth). And finally the
+     * number of bytes per sample.
+     * Fortunately all of the above is contained in struc pam:
+     * http://netpbm.sourceforge.net/doc/libnetpbm_ug.html#pamstruct
+     */
 }
 
 /* A lot of the main() code from pbm_copy can be reused here for opening the input file and
