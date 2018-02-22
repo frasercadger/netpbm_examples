@@ -36,9 +36,24 @@ static const char *p_out_filename = "bitflipped.pbm";
 #include <string.h>
 
 /* Function prototypes */
+void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in);
 void pbm_bitflip(struct pam *p_in, struct pam *p_out);
 
 /* Function definitions */
+
+void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in)
+{
+    /* Outer loop, iterate through all tuples in a row */
+    for(int i = 0; i < p_in->width; ++i)
+    {
+        /* Inner loop, iterate through all samples in a tuple */
+        for (int j = 0; j < p_in->depth; ++j)
+        {
+            /* TODO: Perform bitflipping on indivudal sample */
+        }
+    }
+}
+
 void pbm_bitflip(struct pam *p_in, struct pam *p_out)
 {
     /* In order to bitflip , we need to know the following:
@@ -60,6 +75,7 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out)
         pnm_readpamrow(p_in, p_tuple_row);
 
         /* TODO: Pass row off to function that does bitflipping */
+        bitflip_tupplerow(p_tuple_row, p_in);
 
         /* TODO: Write modified tuple row to output image */
         pnm_writepamrow(p_out, p_tuple_row);
