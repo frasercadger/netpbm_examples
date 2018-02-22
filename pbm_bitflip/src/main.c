@@ -48,6 +48,26 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out)
      * Fortunately all of the above is contained in struc pam:
      * http://netpbm.sourceforge.net/doc/libnetpbm_ug.html#pamstruct
      */
+
+    /* Allocate memory to hold PBM rows to a tuple pointer
+     * tuple_row now effectively points to an 'array' of rows*/
+    tuple *p_tuple_row = pnm_allocpamrow(p_in_pbm);
+
+    /* Copy each row of input to the output */
+    for( uint32_t row = 0; row < p_in_pbm->height; ++row)
+    {
+        /* Read a single row of the image as a 'tuple' */
+        pnm_readpamrow(p_in_pbm, p_tuple_row);
+
+        /* TODO: Pass row off to function that does bitflipping */
+
+        /* TODO: Write modified tuple row to output image */
+        pnm_writepamrow(p_out_pbm, p_tuple_row);
+    }
+
+    /* Tuple pointer cleanup
+     * Frees the memory allocated by pnm_allocpamrow */
+    pnm_freepamrow(p_tuple_row);
 }
 
 /* A lot of the main() code from pbm_copy can be reused here for opening the input file and
