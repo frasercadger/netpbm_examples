@@ -50,7 +50,30 @@ void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in)
         for (int j = 0; j < p_in->depth; ++j)
         {
             /* Perform bitflipping on indivudal sample */
-            p_tuple_row[i][j] = 0;
+
+            /* Find out number of relevant bits */
+            uint8_t sample_bits;
+            /* PBM (raw or otherwise) is monochrome, so uses only 1 bit (0 or 1).
+             * Therefore, although nominally 1 byte is used, only 1 bit of it is
+             * relevant
+             */
+            if(p_in->format == PBM_FORMAT || p_in->format == RPBM_FORMAT)
+            {
+                sample_bits = 1;
+            }
+            else
+            {
+                /* TODO: Check other image formats to see if there's any other
+                 * 'gotchas'.
+                 */
+                sample_bits = p_in->bytes_per_sample * 8;
+            }
+            /* Flip each relevant bit one at a time */
+            for(int k = 0; k < sample_bits ; ++k)
+            {
+                    
+                p_tuple_row[i][j] ^= 1 << k;
+            }  
         }
     }
 
