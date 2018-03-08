@@ -99,10 +99,10 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out)
         /* Read a single row of the image as a 'tuple' */
         pnm_readpamrow(p_in, p_tuple_row);
 
-        /* TODO: Pass row off to function that does bitflipping */
+        /* Pass row off to function that does bitflipping */
         bitflip_tupplerow(p_tuple_row, p_in);
 
-        /* TODO: Write modified tuple row to output image */
+        /* Write modified tuple row to output image */
         pnm_writepamrow(p_out, p_tuple_row);
     }
 
@@ -157,9 +157,8 @@ int main(int argc, char *argv[])
         else
         {
             printf("Output preparation successful\n");
+            /* Do bitflipping */
             pbm_bitflip(&in_pbm, &out_pbm);
-            /* TODO: Do bitflipping */
-            /* TODO: Write bitflipped image to output file */
         }   
     }
 
