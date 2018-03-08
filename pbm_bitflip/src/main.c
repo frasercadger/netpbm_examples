@@ -63,9 +63,9 @@ void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in)
             }
             else
             {
-                /* TODO: Check other image formats to see if there's any other
-                 * 'gotchas'.
-                 */
+                /* For all other formats, we're safe to flip every bit in a
+                 * relevant byte
+                 * */
                 sample_bits = p_in->bytes_per_sample * 8;
             }
             /* Flip each relevant bit one at a time */
