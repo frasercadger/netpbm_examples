@@ -43,15 +43,18 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out);
 
 void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in)
 {
+    uint32_t count = 0;
     /* Outer loop, iterate through all tuples in a row */
     for(int i = 0; i < p_in->width; ++i)
     {
         /* Inner loop, iterate through all samples in a tuple */
         for (int j = 0; j < p_in->depth; ++j)
         {
-            /* TODO: Perform bitflipping on indivudal sample */
+            /* Perform bitflipping on indivudal sample */
+            p_tuple_row[i][j] = 0;
         }
     }
+
 }
 
 void pbm_bitflip(struct pam *p_in, struct pam *p_out)
@@ -132,6 +135,7 @@ int main(int argc, char *argv[])
         else
         {
             printf("Output preparation successful\n");
+            pbm_bitflip(&in_pbm, &out_pbm);
             /* TODO: Do bitflipping */
             /* TODO: Write bitflipped image to output file */
         }   
