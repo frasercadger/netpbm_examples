@@ -43,7 +43,6 @@ void pbm_bitflip(struct pam *p_in, struct pam *p_out);
 
 void bitflip_tupplerow(tuple *p_tuple_row, const struct pam *p_in)
 {
-    uint32_t count = 0;
     /* Outer loop, iterate through all tuples in a row */
     for(int i = 0; i < p_in->width; ++i)
     {
